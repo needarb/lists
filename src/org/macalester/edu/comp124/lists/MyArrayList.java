@@ -47,7 +47,7 @@ public class MyArrayList<E> {
 	 * @return
 	 */
 	public E get(int index) {
-        return null;    // replace this line with the correct code.
+        return elements[index];    // replace this line with the correct code.
 	}
 	
 	/**
@@ -60,7 +60,11 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(E elem) {
-	}
+        if(size() == elements.length)
+            expandSize();
+        elements[size()] = elem;
+        currentSize++;
+    }
 
 	/**
 	 * Inserts a new element at the specified index.
@@ -74,7 +78,15 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(int index, E elem) {
-	}
+        while(elements.length <= index)
+            expandSize();
+        for (int i = elements.length-1; i >= index; i--)
+        {
+            elements[i] = elements[i-1];
+        }
+        elements[index] = elem;
+        currentSize++;
+    }
 	
 	/**
 	 * Doubles the size of the array, copies the old elements
@@ -85,7 +97,11 @@ public class MyArrayList<E> {
      * Hint: use newArrayOfE!
 	 */
 	private void expandSize() {
-	}
+        E[] temp = newArrayOfE(size()*2);
+        for (int i = 0; i < elements.length; i++)
+            temp[i] = elements[i];
+        elements = temp;
+    }
 	
 	/**
 	 * Due to some crazy Java constraints, we can't simply create a
