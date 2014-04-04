@@ -1,10 +1,11 @@
+
 package org.macalester.edu.comp124.lists;
 
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static junit.framework.Assert.*;
 
 public class TestList {
     private MyArrayList<String> list = new MyArrayList<String>();
@@ -73,14 +74,18 @@ public class TestList {
      * Test that add works in a linked lists.
      * This will fail if your list is not a linked list.
      */
-/*    @Test
+
+    @Test
     public void testOneLinkedAdd() {
-        MyLinkedList<String> llist = (MyLinkedList)(Object)list;
+        MyLinkedList<String> llist = new MyLinkedList<>();
         llist.clear();
+        System.out.println(llist.size());
         assertEquals(llist.size(), 0);
+        System.out.println(llist.size());
         assertSame(llist.getHead().getNext(), llist.getTail());
         assertSame(llist.getHead(), llist.getTail().getPrev());
-        list.add("foo");
+        llist.add("foo");
+        System.out.println(llist.size());
         assertEquals(llist.size(), 1);
 
         // there should be a new node following the head.
@@ -89,5 +94,5 @@ public class TestList {
         assertEquals(fooNode.getValue(), "foo");
         assertSame(llist.getTail().getPrev(), fooNode);
     }
-    */
+
 }

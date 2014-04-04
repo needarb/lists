@@ -9,7 +9,8 @@ package org.macalester.edu.comp124.lists;
  * @author shilad
  * @param <E>
  */
-public class MyLinkedList<E> {
+public class MyLinkedList<E>
+{
 	private MyLinkedNode<E> head;
 	private MyLinkedNode<E> tail;
 	private int numElements = 0;
@@ -21,6 +22,7 @@ public class MyLinkedList<E> {
 		head = new MyLinkedNode<E>(null);
 		tail = new MyLinkedNode<E>(null);
 		clear();
+        numElements = 0;
 	}
 
     /**
@@ -28,16 +30,28 @@ public class MyLinkedList<E> {
      * @param index
      * @return
      */
-	public E get(int index) {
-		return null;
-	}
-
+	public E get(int index)
+    {
+        MyLinkedNode currentNode = head;
+        for (int i = 0; i < index; i++)
+        {
+            currentNode = currentNode.getNext();
+        }
+        return (E)currentNode.getValue();
+    }
     /**
      * Adds a new element to the end of the list:
      *
      * @param elem
      */
-	public void add(E elem) {
+	public void add(E elem)
+    {
+        MyLinkedNode newNode = new MyLinkedNode(elem);
+        if(head.getNext() == tail)
+            head.setNext(newNode);
+        tail.setPrev(newNode);
+    //    tail = newNode;
+        numElements++;
 	}
 
     /**
@@ -45,8 +59,18 @@ public class MyLinkedList<E> {
      *
      * @param elem
      */
-	public void add(int i, E elem) {
-	}
+	public void add(int index, E elem)
+    {
+        MyLinkedNode<E> newNode = new MyLinkedNode<E>(elem);
+        MyLinkedNode<E> currentNode = head;
+        for (int i = 0; i < index; i++)
+        {
+            currentNode = currentNode.getNext();
+        }
+        newNode.setNext(currentNode.getNext());
+        currentNode.setNext(newNode);
+        numElements++;
+    }
 
     /**
      * Returns the current size of the list.
